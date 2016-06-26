@@ -1,6 +1,6 @@
 {
   "name": "hi5",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Lightweight type checker for bros.",
   "author": "Nicolas Gryman <ngryman@gmail.com> (http://ngryman.sh/)",
   "homepage": "https://github.com/ngryman/hi5",
