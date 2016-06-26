@@ -106,6 +106,7 @@ function add(...args) {
 
   // [...]
 }
+```
 
 ## License
 
