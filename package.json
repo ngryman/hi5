@@ -29,9 +29,9 @@
     "guard"
   ],
   "devDependencies": {
-    "ava": "^0.15.2",
-    "eslint": "^2.13.1",
+    "ava": "^0.17.0",
+    "eslint": "^3.11.0",
     "eslint-config-ngryman": "^1.1.0",
-    "nyc": "^6.6.1"
+    "nyc": "^10.0.0"
   }
 }
