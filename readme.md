@@ -1,5 +1,7 @@
 # hi5
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ngryman/hi5.svg)](https://greenkeeper.io/)
+
 > Lightweight type checker for bros :raised_hands:.
 
 [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
