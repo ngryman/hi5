@@ -1,8 +1,8 @@
 # hi5
 
-> Lightweight type checker for bros :raised_hands:.
+> Friendly lightweight type checker :raised_hands:.
 
-[![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
+[![travis][travis-image]][travis-url]
 
 [travis-image]: https://img.shields.io/travis/ngryman/hi5.svg?style=flat
 [travis-url]: https://travis-ci.org/ngryman/hi5
@@ -10,7 +10,7 @@
 [codecov-url]: https://codecov.io/github/ngryman/hi5
 
 
-**hi5** checks values against types, that's it, yup.
+**hi5** checks values against types, that's it!
 
 It's meant to be used for function arguments validation and avoid errors related to a lack of
 type checking. That's why you can [guard](#guard-function) functions to release some burden.
