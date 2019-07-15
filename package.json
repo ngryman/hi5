@@ -14,7 +14,7 @@
   "scripts": {
     "check-coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95",
     "coverage": "nyc report --reporter=text-lcov | codecov",
-    "test": "eslint {,lib,test/}*.js && nyc ava"
+    "test": "eslint {,lib/}*.js && nyc ava"
   },
   "precommit": [
     "test",
@@ -29,9 +29,9 @@
     "guard"
   ],
   "devDependencies": {
-    "ava": "^0.19.0",
-    "eslint": "^3.11.0",
+    "ava": "^2.2.0",
+    "eslint": "^6.0.1",
     "eslint-config-ngryman": "^1.1.0",
-    "nyc": "^10.0.0"
+    "nyc": "^14.1.1"
   }
 }
