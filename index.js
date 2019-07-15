@@ -22,17 +22,18 @@ const typeCheckers = require('./lib/type_checkers')
  * @param {*}      value
  * @param {string} name
  * @param {array}  types
+ * @return {*}
  */
 function hi5(value, name, types) {
   // make sure we have an array of types
-  types = Array.isArray(types) ? types : [ types ]
+  types = Array.isArray(types) ? types : [types]
 
   // test each value/type pair
   let res = false
   for (let type of types) {
     let checker = typeCheckers.get(type)
     if (!checker) {
-      checker = value => (value instanceof type)
+      checker = value => value instanceof type
     }
     res |= checker(value)
   }
@@ -41,6 +42,8 @@ function hi5(value, name, types) {
   if (!res) {
     throwError(name, types)
   }
+
+  return value
 }
 
 /**
@@ -63,14 +66,15 @@ function hi5(value, name, types) {
  * @param {*}      value
  * @param {string} name
  * @param {array}  types
+ * @return {*}
  */
 function optional(value, name, types) {
   // append optional types
-  types = Array.isArray(types) ? types : [ types ]
+  types = Array.isArray(types) ? types : [types]
   types = types.concat([null, undefined])
 
   // call original hi5
-  hi5.call(this, value, name, types)
+  return hi5.call(this, value, name, types)
 }
 
 /**
@@ -104,7 +108,9 @@ function guard(fn, types) {
 /** Expose formatError */
 Object.defineProperty(hi5, 'formatError', {
   get: () => throwError.formatError,
-  set: (val) => { throwError.formatError = val }
+  set: val => {
+    throwError.formatError = val
+  }
 })
 
 module.exports = hi5

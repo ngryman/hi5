@@ -9,7 +9,6 @@
 [codecov-image]: https://img.shields.io/codecov/c/github/ngryman/hi5.svg
 [codecov-url]: https://codecov.io/github/ngryman/hi5
 
-
 **hi5** checks values against types, that's it!
 
 It's meant to be used for function arguments validation and avoid errors related to a lack of
@@ -33,7 +32,7 @@ function add(a, b) {
   return a + b
 }
 
-add(1, 2)   // => 3
+add(1, 2) // => 3
 add('1', 2) // Error
 ```
 
@@ -45,9 +44,18 @@ function display(val) {
   console.log(val)
 }
 
-display(1)    // => 1
-display('1')  // => '1'
-display({})   // Error
+display(1) // => 1
+display('1') // => '1'
+display({}) // Error
+```
+
+### Shorthand version
+
+```javascript
+const add = (a, b) => hi5(a, 'a', Number) + hi5(b, 'b', Number)
+
+add(1, 2) // => 3
+add('1', 2) // Error
 ```
 
 ### Optional arguments
@@ -60,9 +68,9 @@ function display(val, options) {
   console.log(val)
 }
 
-display(1)                    // => 1
-display(1, { color: 'red' })  // => 1
-display(1, 2)                 // Error
+display(1) // => 1
+display(1, { color: 'red' }) // => 1
+display(1, 2) // Error
 ```
 
 ### Guard function
@@ -72,12 +80,9 @@ function add(a, b) {
   return a + b
 }
 
-const guardedAdd = hi5.guard(add, [
-  [ 'a', Number ],
-  [ 'b', Number ]
-])
+const guardedAdd = hi5.guard(add, [['a', Number], ['b', Number]])
 
-guardedAdd(1, 2)   // => 3
+guardedAdd(1, 2) // => 3
 guardedAdd('1', 2) // Error
 ```
 
@@ -92,10 +97,7 @@ function add(a, b) {
   return a + b
 }
 
-module.exports = hi5.guard(add, [
-  [ 'a', Number ],
-  [ 'b', Number ]
-])
+module.exports = hi5.guard(add, [['a', Number], ['b', Number]])
 ```
 
 ### Rest parameters
