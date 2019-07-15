@@ -66,15 +66,16 @@ function hi5(value, name, types) {
  * @param {*}      value
  * @param {string} name
  * @param {array}  types
+ * @param {[*]}    defaultValue
  * @return {*}
  */
-function optional(value, name, types) {
+function optional(value, name, types, defaultValue) {
   // append optional types
   types = Array.isArray(types) ? types : [types]
   types = types.concat([null, undefined])
 
   // call original hi5
-  return hi5.call(this, value, name, types)
+  return hi5.call(this, value, name, types) || defaultValue
 }
 
 /**
