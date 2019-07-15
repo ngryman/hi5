@@ -47,6 +47,39 @@ function hi5(value, name, types) {
 }
 
 /**
+ * Check a deep value with the given mapper.
+ *
+ * @example
+ * function add(obj) {
+ *   const {a, b} = hi5(obj, 'obj', ({ a, b }) => ({
+ *     a: hi5(a, 'a', Number),
+ *     b: hi5(b, 'b', Number)
+ *   }))
+ *
+ *   return (a + b)
+ * }
+ *
+ * add(1, 2)
+ * // => 3
+ * add()
+ * // Error
+ * add('1', 2)
+ * // Error
+ *
+ * @param {objet}    obj
+ * @param {string}   name
+ * @param {function} mapper
+ * @return {*}
+ */
+function deep(obj, name, mapper) {
+  // call original hi5
+  hi5.call(this, obj, name, Object)
+
+  // give the control to the callee
+  return mapper(obj)
+}
+
+/**
  * Check an optional value, throwing an error in case of failure.
  * It does the exact same job as `hi5` but also allows the value to either be `null` or `undefined`.
  *
@@ -115,5 +148,6 @@ Object.defineProperty(hi5, 'formatError', {
 })
 
 module.exports = hi5
+module.exports.deep = deep
 module.exports.optional = optional
 module.exports.guard = guard

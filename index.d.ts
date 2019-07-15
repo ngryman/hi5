@@ -7,6 +7,13 @@ declare module 'hi5' {
       types: any,
       defaultValue: Exclude<T, undefined>
     ): Exclude<T, undefined>
+
+    export function deep<T>(
+      obj: T,
+      name: string,
+      mapper: (obj: Exclude<T, undefined>) => Exclude<Required<T>, undefined>
+    ): Exclude<Required<T>, undefined>
+
     export function guard(fn: Function, types: any[]): void
   }
 
