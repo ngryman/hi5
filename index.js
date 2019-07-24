@@ -1,7 +1,60 @@
 'use strict'
 
-const throwError = require('./lib/throw_error')
-const typeCheckers = require('./lib/type_checkers')
+/** Vowels pattern used to properly format error message. */
+const vowelsPattern = /[aeiou]/i
+
+/**
+ * Format error message.
+ *
+ * @param  {string} name
+ * @param  {array}  typeNames
+ * @return {string}
+ */
+const formatError = (name, typeNames) => {
+  const n = vowelsPattern.test(typeNames[0][0]) ? 'n' : ''
+  return `'${name}' must be a${n} ${typeNames.join(' or ')}`
+}
+
+/**
+ * Throw error.
+ *
+ * @param {string} name
+ * @param {array} types
+ */
+const throwError = (name, types) => {
+  const typeNames = types.map(type => (type ? type.name : '' + type))
+  const msg = throwError.formatError(name, typeNames)
+  throw new Error(msg)
+}
+throwError.formatError = formatError
+
+/**
+ * Create an equality checker.
+ *
+ * @param  {*} type
+ * @return {function}
+ */
+const equals = type => value => type === value
+
+/**
+ * Create an type of checker.
+ *
+ * @param  {*} type
+ * @return {function}
+ */
+const typeOf = type => value => type === typeof value
+
+/** Map types to their corresponding checkers. */
+const typeCheckers = new Map([
+  [null, equals(null)],
+  [undefined, equals(undefined)],
+  [String, typeOf('string')],
+  [Number, typeOf('number')],
+  [Boolean, typeOf('boolean')],
+  [Function, typeOf('function')],
+  [Object, typeOf('object')],
+  [Array, Array.isArray]
+])
 
 /**
  * Check a value against a list of types, throwing an error in case of failure.
@@ -73,7 +126,7 @@ function hi5(value, name, types) {
  */
 function deep(obj, name, mapper) {
   // call original hi5
-  hi5.call(this, obj, name, Object)
+  hi5(obj, name, Object)
 
   // give the control to the callee
   return mapper(obj)

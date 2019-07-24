@@ -9,13 +9,12 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
-    "index.js",
-    "lib"
+    "index.js"
   ],
   "scripts": {
     "check-coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95",
     "coverage": "nyc report --reporter=text-lcov | codecov",
-    "test": "eslint {,lib/}*.js && nyc ava"
+    "test": "eslint *.js && nyc ava"
   },
   "precommit": [
     "test",
