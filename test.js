@@ -55,6 +55,19 @@ test('allow optional shorthand', t => {
   t.throws(() => hi5.optional('', '1337', Number))
 })
 
+test('allow deep checks', t => {
+  t.notThrows(() =>
+    hi5.deep({ foo: 'bar' }, 'deep', ({ foo }) => ({
+      foo: hi5(foo, 'foo', String)
+    }))
+  )
+  t.throws(() =>
+    hi5.deep({ foo: 1337 }, 'deep', ({ foo }) => ({
+      foo: hi5(foo, 'foo', String)
+    }))
+  )
+})
+
 test('create a guarded function', t => {
   const guarded = hi5.guard(a => true, [['a', Number]])
   t.throws(() => guarded('1337'), "'a' must be a Number")
